@@ -1,6 +1,6 @@
 package lexer
 
-import "github.com/monkey/token"
+import "github.com/dmarticus/monkey/token"
 
 // Lexer is the type definition for the Lexer type.  This interface is intended to abstract the data structure
 // necessary for accepting source code and returning tokenized source code
