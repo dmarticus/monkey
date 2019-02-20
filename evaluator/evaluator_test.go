@@ -26,9 +26,23 @@ func TestEvalIntegerExpression(t *testing.T) {
 func testEval(input string) object.Object {
 	l := lexer.New(input)
 	p := parser.New(l)
-	program := p.ParseProgram()
 
-	return Eval(program)
+	// two types of program: one with content, one that's nil
+	tests := []struct {
+		program *ast.Program
+	}{
+		{
+			program: p.ParseProgram(),
+		},
+		{
+			program: nil,
+		},
+	}
+	for _, test := range tests {
+		return Eval(test.program)
+	}
+
+	return nil
 }
 
 func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
@@ -42,12 +56,4 @@ func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 		return false
 	}
 	return true
-}
-
-func Eval(node ast.Node) object.Object {
-	switch node := node.(type) {
-	case *ast.IntegerLiteral:
-		return &object.Integer{Value: node.Value}
-	}
-	return nil
 }
