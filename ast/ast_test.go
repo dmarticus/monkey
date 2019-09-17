@@ -1,5 +1,4 @@
 package ast
-    "timed-memoize": "^2.4.2"
 
 import (
 	"testing"
